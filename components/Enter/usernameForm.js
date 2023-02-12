@@ -1,13 +1,16 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { getFirestore, doc, writeBatch } from "firebase/firestore";
+import { useState, useContext, useEffect, useCallback } from "react";
+import { getFirestore, doc, getDoc, writeBatch } from "firebase/firestore";
+import { UsernameMessage } from "./usernameMessage";
+import { UserContext } from "../../context/userContext";
+import debounce from "lodash.debounce";
 
 export const UsernameForm = () => {
 	const [formValue, setFormValue] = useState("");
 	const [isValid, setIsValid] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	// const { user, username } = useContext(UserContext);
+	const { user, username } = useContext(UserContext);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -43,11 +46,24 @@ export const UsernameForm = () => {
 		}
 	};
 
-	//
-
 	useEffect(() => {
 		checkUsername(formValue);
 	}, [formValue]);
+
+	// Hit the database for username match after each debounced change
+	// useCallback is required for debounce to work
+	const checkUsername = useCallback(
+		debounce(async (username) => {
+			if (username.length >= 3) {
+				const ref = doc(getFirestore(), "usernames", username);
+				const snap = await getDoc(ref);
+				console.log("Firestore read executed!", snap.exists());
+				setIsValid(!snap.exists());
+				setLoading(false);
+			}
+		}, 500),
+		[]
+	);
 
 	return (
 		!username && (
