@@ -15,6 +15,6 @@
 		"jsx": "preserve",
 		"incremental": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/firebase.js", "components/navbar.js"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "db/firebase.js", "components/navbar.js"],
 	"exclude": ["node_modules"]
 }

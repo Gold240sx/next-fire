@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import EnterPage from "../pages/enter";
+import EnterPage from "./enter";
 import Loader from "../components/Loader";
 
 import { ToastContainer, toast } from "react-toastify";
