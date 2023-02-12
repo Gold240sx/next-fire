@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, firestore } from "../db/firebase";
+import { auth, db } from "../db/firebase";
 import { getFirestore, collection, doc, getDoc, onSnapshot, query, where, limit } from "firebase/firestore";
 
 export function useUserData() {

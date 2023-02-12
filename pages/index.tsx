@@ -20,7 +20,6 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Loader show />
-			<EnterPage />
 			<button onClick={notify}>Toast</button>
 			<ToastContainer />
 

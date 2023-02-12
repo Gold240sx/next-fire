@@ -30,7 +30,7 @@ export const auth = getAuth(firebaseApp);
 export const googleAuthProvider = new GoogleAuthProvider();
 
 // firestore exports
-export const firestore = getFirestore(firebaseApp);
+export const db = getFirestore(firebaseApp);
 
 // storage exports
 export const storage = getStorage(firebaseApp);
@@ -41,7 +41,7 @@ export const STATE_CHANGED = "state_changed";
  * @param  {string} username
  */
 export async function getUserWithUsername(username) {
-	const q = query(collection(firestore, "users"), where("username", "==", username), limit(1));
+	const q = query(collection(db, "users"), where("username", "==", username), limit(1));
 	const userDoc = (await getDocs(q)).docs[0];
 	return userDoc;
 }
