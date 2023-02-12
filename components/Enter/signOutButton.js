@@ -3,7 +3,13 @@ import { auth } from "../../db/firebase";
 
 // Sign out button
 export function SignOutButton() {
-	return <button onClick={() => signOut(auth)}>Sign Out</button>;
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		console.log("signed out");
+		await signOut(auth);
+	};
+
+	return <button onClick={handleSubmit}>Sign Out</button>;
 }
 
 // export default SignOutButton;

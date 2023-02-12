@@ -5,13 +5,16 @@ import { UserContext } from "../context/userContext";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useUserData } from "../hooks/useUserData";
 
 // import { GetServerSideProps } from "next";
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const userData = useUserData();
+
 	return (
 		<>
-			<UserContext.Provider value={{ user: {}, username: "mike" }}>
+			<UserContext.Provider value={userData}>
 				<Navbar />
 				<Component {...pageProps} />
 				<ToastContainer />
